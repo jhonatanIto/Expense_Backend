@@ -11,6 +11,7 @@ export const userData = async (req, res) => {
         name: users.name,
         email: users.email,
         plan: users.plan,
+        picture: users.picture,
       })
       .from(users)
       .where(eq(user.id, userId));

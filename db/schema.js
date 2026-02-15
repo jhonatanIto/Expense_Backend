@@ -8,13 +8,6 @@ import {
   pgEnum,
 } from "drizzle-orm/pg-core";
 
-export const cardTypeEnum = pgEnum("card_type", ["income", "expense"]);
-
-export const expenseCategoryEnum = pgEnum("expense_category", [
-  "food",
-  "fixed",
-  "other",
-]);
 export const planEnum = pgEnum("user_plan", ["free", "pro"]);
 
 export const users = pgTable("users", {
@@ -23,13 +16,20 @@ export const users = pgTable("users", {
   email: text("email").notNull(),
   password: text("password"),
   googleId: text("google_id"),
-  photo: text("photo"),
   plan: planEnum("plan").default("free").notNull(),
+  picture: text("picture"),
   created_at: timestamp("created_at", { withTimezone: true })
     .defaultNow()
     .notNull(),
 });
 
+export const cardTypeEnum = pgEnum("card_type", ["income", "expense"]);
+
+export const expenseCategoryEnum = pgEnum("expense_category", [
+  "food",
+  "fixed",
+  "other",
+]);
 export const cards = pgTable("cards", {
   id: serial("id").primaryKey(),
   user_id: integer("user_id")
@@ -39,7 +39,5 @@ export const cards = pgTable("cards", {
   amount: numeric("amount", { precision: 10, scale: 2 }).notNull(),
   type: cardTypeEnum("type").default("expense").notNull(),
   category: expenseCategoryEnum("category"),
-  created_at: timestamp("created_at", { withTimezone: true })
-    .defaultNow()
-    .notNull(),
+  created_at: text("created_at").notNull(),
 });
