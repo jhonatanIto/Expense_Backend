@@ -14,7 +14,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://expense-tracker-pied-six-60.vercel.app/",
+      "https://expense-tracker-pied-six-60.vercel.app",
     ],
   }),
 );
